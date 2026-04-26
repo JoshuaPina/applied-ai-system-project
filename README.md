@@ -147,7 +147,7 @@ Top 5:
 - Thunder Forge (3.29)
 - Midnight Groove (3.14)
 
-![Case-Sensitivity Attack](artifacts/adversarial_profiles/case-sensitivity-attack.svg)
+![Case-Sensitivity Attack](assets/artifacts/adversarial_profiles/case-sensitivity-attack.svg)
 
 ### 2) Out-of-Range Energy High
 Input: genre=pop, mood=happy, energy=2.50, likes_acoustic=False
@@ -159,7 +159,7 @@ Top 5:
 - Thunder Forge (0.97)
 - Baseline Bounce (0.91)
 
-![Out-of-Range Energy High](artifacts/adversarial_profiles/out-of-range-energy-high.svg)
+![Out-of-Range Energy High](assets/artifacts/adversarial_profiles/out-of-range-energy-high.svg)
 
 ### 3) Out-of-Range Energy Low
 Input: genre=rock, mood=intense, energy=-1.20, likes_acoustic=True
@@ -171,7 +171,7 @@ Top 5:
 - Spacewalk Thoughts (0.92)
 - Coffee Shop Stories (0.89)
 
-![Out-of-Range Energy Low](artifacts/adversarial_profiles/out-of-range-energy-low.svg)
+![Out-of-Range Energy Low](assets/artifacts/adversarial_profiles/out-of-range-energy-low.svg)
 
 ### 4) Unknown Labels + Numeric Only
 Input: genre=nonexistent-genre, mood=nonexistent-mood, energy=0.55, likes_acoustic=True
@@ -183,7 +183,7 @@ Top 5:
 - Velvet Rain (2.90)
 - Midnight Coding (2.88)
 
-![Unknown Labels + Numeric Only](artifacts/adversarial_profiles/unknown-labels-plus-numeric-only.svg)
+![Unknown Labels + Numeric Only](assets/artifacts/adversarial_profiles/unknown-labels-plus-numeric-only.svg)
 
 ### 5) Sparse Profile (No Genre/Mood)
 Input: energy=0.80, likes_acoustic=False
@@ -195,7 +195,7 @@ Top 5:
 - Neon Bazaar (3.16)
 - Night Drive Loop (3.16)
 
-![Sparse Profile](artifacts/adversarial_profiles/sparse-profile-no-genre-mood.svg)
+![Sparse Profile](assets/artifacts/adversarial_profiles/sparse-profile-no-genre-mood.svg)
 
 Key behavior observed:
 - Category matching is case-sensitive, so capitalized inputs can bypass genre/mood match boosts.
@@ -219,7 +219,7 @@ This recommender is explainable and useful for learning, but it has important li
 
 Read and complete `model_card.md`:
 
-[**Model Card**](model_card.md)
+[**Model Card**](assets/docs/model_card.md)
 
 Write 1 to 2 paragraphs here about what you learned:
 

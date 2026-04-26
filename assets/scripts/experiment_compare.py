@@ -1,6 +1,15 @@
+from pathlib import Path
+import sys
+
+if __package__ in {None, ""}:
+    sys.path.append(str(Path(__file__).resolve().parents[2]))
+
 from src.recommender import load_songs, recommend_songs
 
-songs = load_songs('data/songs.csv')
+PROJECT_ROOT = Path(__file__).resolve().parents[2]
+SONGS_PATH = PROJECT_ROOT / 'data' / 'songs.csv'
+
+songs = load_songs(str(SONGS_PATH))
 profiles = {
     'High-Energy Pop': {'genre':'pop','mood':'happy','energy':0.9,'likes_acoustic':False},
     'Chill Lofi': {'genre':'lofi','mood':'chill','energy':0.35,'likes_acoustic':True},

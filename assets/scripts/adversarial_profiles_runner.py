@@ -1,6 +1,16 @@
+from pathlib import Path
+import sys
+
+if __package__ in {None, ""}:
+    sys.path.append(str(Path(__file__).resolve().parents[2]))
+
 from src.recommender import load_songs, recommend_songs
 
-songs = load_songs('data/songs.csv')
+PROJECT_ROOT = Path(__file__).resolve().parents[2]
+SONGS_PATH = PROJECT_ROOT / 'data' / 'songs.csv'
+RESULTS_PATH = PROJECT_ROOT / 'assets' / 'results' / 'adversarial_profile_results.txt'
+
+songs = load_songs(str(SONGS_PATH))
 
 profiles = {
     "Case-Sensitivity Attack": {
@@ -35,7 +45,7 @@ profiles = {
 
 sep = "=" * 90
 
-with open('adversarial_profile_results.txt', 'w', encoding='utf-8') as out:
+with open(RESULTS_PATH, 'w', encoding='utf-8') as out:
     out.write('ADVERSARIAL / EDGE-CASE PROFILE RESULTS\\n')
     out.write(sep + '\\n\\n')
 
@@ -59,4 +69,4 @@ with open('adversarial_profile_results.txt', 'w', encoding='utf-8') as out:
 
         out.write('\\n' + sep + '\\n\\n')
 
-print('Wrote adversarial_profile_results.txt')
+print(f'Wrote {RESULTS_PATH.name}')

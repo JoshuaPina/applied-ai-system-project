@@ -1,11 +1,17 @@
 from pathlib import Path
+import sys
+
 from rich.console import Console
 from rich.panel import Panel
 from rich.table import Table
 
+if __package__ in {None, ""}:
+    sys.path.append(str(Path(__file__).resolve().parents[2]))
+
 from src.recommender import load_songs, recommend_songs
 
-OUTPUT_DIR = Path("artifacts/adversarial_profiles")
+PROJECT_ROOT = Path(__file__).resolve().parents[2]
+OUTPUT_DIR = PROJECT_ROOT / "assets" / "artifacts" / "adversarial_profiles"
 OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
 
 profiles = {
@@ -87,7 +93,7 @@ def render_profile(name: str, prefs: dict, songs: list[dict]) -> str:
 
 
 def main() -> None:
-    songs = load_songs("data/songs.csv")
+    songs = load_songs(str(PROJECT_ROOT / "data" / "songs.csv"))
     summary = []
 
     for name, prefs in profiles.items():

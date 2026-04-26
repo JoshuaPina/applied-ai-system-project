@@ -9,12 +9,22 @@ You will implement the functions in recommender.py:
 - recommend_songs
 """
 
+from pathlib import Path
+import sys
+
 from rich.console import Console
 from rich.markup import escape
 from rich.panel import Panel
 from rich.table import Table
 
+if __package__ in {None, ""}:
+    sys.path.append(str(Path(__file__).resolve().parents[1]))
+
 from src.recommender import load_songs, recommend_songs
+
+
+PROJECT_ROOT = Path(__file__).resolve().parents[1]
+SONGS_PATH = PROJECT_ROOT / "data" / "songs.csv"
 
 
 def main() -> None:
@@ -29,8 +39,8 @@ def main() -> None:
             return "bold yellow"
         return "bold red"
 
-    console.print("Loading catalog from data/songs.csv...", style="cyan")
-    songs = load_songs("data/songs.csv")
+    console.print(f"Loading catalog from {SONGS_PATH.relative_to(PROJECT_ROOT)}...", style="cyan")
+    songs = load_songs(str(SONGS_PATH))
     console.print(f"Loaded Songs: {len(songs)}", style="bold green")
 
     user_profiles = {
