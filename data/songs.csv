@@ -1,11 +1,21 @@
-id,title,artist,genre,mood,energy,tempo_bpm,valence,danceability,acousticness
-1,Sunrise City,Neon Echo,pop,happy,0.82,118,0.84,0.79,0.18
-2,Midnight Coding,LoRoom,lofi,chill,0.42,78,0.56,0.62,0.71
-3,Storm Runner,Voltline,rock,intense,0.91,152,0.48,0.66,0.10
-4,Library Rain,Paper Lanterns,lofi,chill,0.35,72,0.60,0.58,0.86
-5,Gym Hero,Max Pulse,pop,intense,0.93,132,0.77,0.88,0.05
-6,Spacewalk Thoughts,Orbit Bloom,ambient,chill,0.28,60,0.65,0.41,0.92
-7,Coffee Shop Stories,Slow Stereo,jazz,relaxed,0.37,90,0.71,0.54,0.89
-8,Night Drive Loop,Neon Echo,synthwave,moody,0.75,110,0.49,0.73,0.22
-9,Focus Flow,LoRoom,lofi,focused,0.40,80,0.59,0.60,0.78
-10,Rooftop Lights,Indigo Parade,indie pop,happy,0.76,124,0.81,0.82,0.35
+id,title,artist,genre,mood,energy,tempo_bpm,valence,danceability,acousticness,popularity,release_decade,mood_tags,instrumentalness,explicit_lyrics
+1,Sunrise City,Neon Echo,pop,happy,0.82,118,0.84,0.79,0.18,88,2010,happy|euphoric|uplifting,0.12,0
+2,Midnight Coding,LoRoom,lofi,chill,0.42,78,0.56,0.62,0.71,79,2020,chill|focused|late-night,0.82,0
+3,Storm Runner,Voltline,rock,intense,0.91,152,0.48,0.66,0.10,74,2000,intense|aggressive|driving,0.06,1
+4,Library Rain,Paper Lanterns,lofi,chill,0.35,72,0.60,0.58,0.86,66,2010,chill|study|nostalgic,0.88,0
+5,Gym Hero,Max Pulse,pop,intense,0.93,132,0.77,0.88,0.05,93,2020,energetic|euphoric|workout,0.03,1
+6,Spacewalk Thoughts,Orbit Bloom,ambient,chill,0.28,60,0.65,0.41,0.92,58,1990,peaceful|spacey|meditative,0.95,0
+7,Coffee Shop Stories,Slow Stereo,jazz,relaxed,0.37,90,0.71,0.54,0.89,64,1980,warm|relaxed|cozy,0.73,0
+8,Night Drive Loop,Neon Echo,synthwave,moody,0.75,110,0.49,0.73,0.22,81,1980,moody|nostalgic|driving,0.18,0
+9,Focus Flow,LoRoom,lofi,focused,0.40,80,0.59,0.60,0.78,72,2020,focused|study|calm,0.80,0
+10,Rooftop Lights,Indigo Parade,indie pop,happy,0.76,124,0.81,0.82,0.35,77,2010,happy|warm|summer,0.20,0
+11,Neon Bazaar,Velvet Circuit,electronic,energetic,0.88,128,0.62,0.86,0.14,83,2010,euphoric|energetic|festival,0.09,0
+12,Golden Hours,Marigold Lane,folk,warm,0.33,92,0.74,0.47,0.81,62,1970,warm|nostalgic|acoustic,0.67,0
+13,Baseline Bounce,City Static,hip hop,confident,0.79,96,0.58,0.91,0.09,86,2000,confident|driving|night,0.04,1
+14,Velvet Rain,North Harbor,r&b,romantic,0.56,84,0.83,0.64,0.42,75,1990,romantic|smooth|late-night,0.22,0
+15,Thunder Forge,Iron Chapel,metal,aggressive,0.97,168,0.28,0.70,0.03,69,2000,aggressive|intense|adrenaline,0.02,1
+16,Sunset Caravan,Desert Bloom,reggae,laid-back,0.47,102,0.67,0.71,0.65,63,1970,laid-back|warm|sunny,0.31,0
+17,Paper Lantern Waltz,Glass Meadow,classical,peaceful,0.18,68,0.90,0.22,0.96,57,1960,peaceful|nostalgic|cinematic,0.98,0
+18,Midnight Groove,Blue Avenue,funk,groovy,0.83,116,0.77,0.89,0.18,80,1980,groovy|dance|party,0.07,0
+19,After the Rain,Juniper Trail,country,nostalgic,0.38,88,0.69,0.55,0.73,61,1990,nostalgic|storytelling|warm,0.49,0
+20,Static Hearts,Analog Bloom,alternative,restless,0.61,122,0.51,0.68,0.27,71,2010,restless|moody|urban,0.15,1

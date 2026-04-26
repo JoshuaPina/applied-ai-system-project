@@ -1,0 +1,21 @@
+PROFILE: High-Energy Pop
+  1. Sunrise City | 10.42 | genre matches pop; mood matches happy; energy is close to the target (0.82 vs 0.90); lower acousticness fits the user's preference
+  2. Rooftop Lights | 7.95 | mood matches happy; energy is close to the target (0.76 vs 0.90); lower acousticness fits the user's preference
+  3. Gym Hero | 7.80 | genre matches pop; energy is close to the target (0.93 vs 0.90); lower acousticness fits the user's preference
+  4. Storm Runner | 5.85 | energy is close to the target (0.91 vs 0.90); lower acousticness fits the user's preference
+  5. Neon Bazaar | 5.76 | energy is close to the target (0.88 vs 0.90); lower acousticness fits the user's preference
+
+PROFILE: Chill Lofi
+  1. Library Rain | 10.86 | genre matches lofi; mood matches chill; energy is close to the target (0.35 vs 0.35); higher acousticness fits the user's preference
+  2. Midnight Coding | 10.36 | genre matches lofi; mood matches chill; energy is close to the target (0.42 vs 0.35); higher acousticness fits the user's preference
+  3. Spacewalk Thoughts | 8.57 | mood matches chill; energy is close to the target (0.28 vs 0.35); higher acousticness fits the user's preference
+  4. Focus Flow | 7.53 | genre matches lofi; energy is close to the target (0.40 vs 0.35); higher acousticness fits the user's preference
+  5. Coffee Shop Stories | 5.79 | energy is close to the target (0.37 vs 0.35); higher acousticness fits the user's preference
+
+PROFILE: Deep Intense Rock
+  1. Storm Runner | 10.85 | genre matches rock; mood matches intense; energy is close to the target (0.91 vs 0.92); lower acousticness fits the user's preference
+  2. Gym Hero | 8.90 | mood matches intense; energy is close to the target (0.93 vs 0.92); lower acousticness fits the user's preference
+  3. Thunder Forge | 5.72 | energy is close to the target (0.97 vs 0.92); lower acousticness fits the user's preference
+  4. Neon Bazaar | 5.66 | energy is close to the target (0.88 vs 0.92); lower acousticness fits the user's preference
+  5. Midnight Groove | 5.37 | energy is close to the target (0.83 vs 0.92); lower acousticness fits the user's preference
+
