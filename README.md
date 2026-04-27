@@ -1,5 +1,23 @@
 # Music Recommender Simulation Plus LLM Explanations
 
+## Demo
+
+Video walkthrough: [Walk with me!](https://github.com/user-attachments/assets/926598ac-e93e-444d-bfaf-928d50a888ce)
+
+
+
+## Table of Contents
+
+- [Demo Recording](#demo)
+- [Title and Summary](#title-and-summary)
+- [Architecture Overview](#architecture-overview)
+- [Setup Instructions](#setup-instructions)
+- [Sample Interactions](#sample-interactions)
+- [Design Decisions](#design-decisions)
+- [Testing Summary](#testing-summary)
+- [Reflection](#reflection)
+- [Related Documents](#related-documents)
+
 ## Title and Summary
 
 This project is an upgraded version of **Module/Project 3: Music Recommender Simulation**. The original goal in Module 3 was to model songs and user preferences as structured data, score songs with a transparent weighted rule, and return top recommendations with clear reasoning. It could personalize music picks from a small catalog, but explanations were rule-based only and reliability checks were limited.

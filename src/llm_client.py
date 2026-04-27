@@ -126,18 +126,31 @@ class GeminiClient:
                 "Missing GEMINI_API_KEY. Set it in your .env file or environment."
             )
 
-        try:
-            import google.genai as genai
-        except ImportError:
-            raise RuntimeError(
-                "google-genai library not installed. Run: pip install google-genai"
-            )
-
-        genai.configure(api_key=api_key)
         self.model_name = model_name
         self.temperature = float(temperature)
-        self.client = genai.GenerativeModel(model_name, generation_config={"temperature": temperature})
-        logger.info(f"Initialized GeminiClient with model {model_name}")
+
+        # Prefer the current google-genai SDK. Fall back to legacy google-generativeai.
+        try:
+            from google import genai as genai_sdk
+
+            self._sdk = "google-genai"
+            self.client = genai_sdk.Client(api_key=api_key)
+            logger.info(f"Initialized GeminiClient (google-genai) with model {model_name}")
+        except ImportError:
+            try:
+                import google.generativeai as genai_legacy
+            except ImportError:
+                raise RuntimeError(
+                    "Gemini SDK not installed. Run: pip install google-genai"
+                )
+
+            self._sdk = "google-generativeai"
+            genai_legacy.configure(api_key=api_key)
+            self.client = genai_legacy.GenerativeModel(
+                model_name,
+                generation_config={"temperature": self.temperature},
+            )
+            logger.info(f"Initialized GeminiClient (legacy SDK) with model {model_name}")
 
     def complete(self, system_prompt: str, user_prompt: str) -> str:
         """
@@ -146,8 +159,17 @@ class GeminiClient:
         """
         try:
             merged_prompt = f"{system_prompt}\n\n{user_prompt}".strip()
-            response = self.client.generate_content(merged_prompt)
-            result = response.text or ""
+
+            if self._sdk == "google-genai":
+                response = self.client.models.generate_content(
+                    model=self.model_name,
+                    contents=merged_prompt,
+                    config={"temperature": self.temperature},
+                )
+            else:
+                response = self.client.generate_content(merged_prompt)
+
+            result = getattr(response, "text", None) or ""
             logger.debug(f"Gemini response: {result[:100]}...")
             return result
 
