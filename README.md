@@ -11,7 +11,43 @@ Your goal is to:
 - Evaluate what your system gets right and wrong
 - Reflect on how this mirrors real world AI recommenders
 
-This version builds a transparent, CLI-first music recommender that scores each song using weighted feature matching (genre, mood, energy, and acousticness) plus extended metadata tuning. It outputs top recommendations with plain-language reasons so you can see exactly why each song ranked where it did. I also evaluated edge-case user profiles to test robustness, bias risk, and how sensitive rankings are to weight changes.
+This version builds a transparent music recommender with **LLM-powered explanations** and **robustness testing**:
+- **Core Algorithm**: Weighted feature matching (genre, mood, energy, acousticness, popularity, decade preference)
+- **AI Feature (RAG)**: LLM retrieves song metadata and generates personalized natural-language explanations
+- **Reliability System**: Adversarial testing, consistency checks, sensitivity analysis, and bias detection
+- **Interfaces**: Both CLI (pure Python) and interactive Streamlit UI
+
+---
+
+## 🏗️ System Architecture
+
+The system integrates four main components:
+
+```mermaid
+graph TD
+    A["👤 User Preferences\n(genre, mood, energy,\nenergy, acousticness)"] --> B["⚙️ Recommender\n(weighted scoring)"]
+    B --> C["📊 Ranked Songs\n(score + breakdown)"]
+    C --> D["🤖 LLM Client\n(mock or real API)"]
+    D --> E["💡 Personalized\nExplanation"]
+    C --> F["🧪 Reliability Tests"]
+    F --> G["📈 Robustness\nReport"]
+    B --> H["📝 Logging & Audit Trail"]
+    
+    I["📱 Streamlit UI\nor\n💻 CLI"]
+    A -.-> I
+    E -.-> I
+    G -.-> I
+```
+
+### Component Details
+
+| Component | Role | Technology |
+|-----------|------|-----------|
+| **Recommender** | Scores songs using weighted features | Pure Python |
+| **LLM Client** | Generates explanations via API or mock | OpenAI / Gemini / MockClient |
+| **Reliability System** | Tests consistency, sensitivity, bias | Custom testing suite |
+| **UI Layer** | User interaction & visualization | Streamlit (or CLI) |
+| **Logging** | Audit trail for LLM calls & decisions | Python logging |
 
 ---
 
@@ -99,37 +135,147 @@ Additional visualization:
 
 ## Getting Started
 
+### Prerequisites
+
+- Python 3.9+
+- pip
+
 ### Setup
 
-1. Create a virtual environment (optional but recommended):
+1. **Clone and navigate to the project:**
+
+   ```bash
+   cd applied-ai-system-final
+   ```
+
+2. **Create a virtual environment (recommended):**
 
    ```bash
    python -m venv .venv
-   source .venv/bin/activate      # Mac or Linux
-   .venv\Scripts\activate         # Windows
-  ```
+   
+   # Activate (Mac/Linux):
+   source .venv/bin/activate
+   
+   # Activate (Windows):
+   .venv\Scripts\activate
+   ```
 
-2. Install dependencies
+3. **Install dependencies:**
+
+   ```bash
+   pip install -r requirements.txt
+   ```
+
+4. **(Optional) Set up LLM API keys for powered explanations:**
+
+   Copy `.env.example` to `.env` and fill in your API keys:
+
+   ```bash
+   cp .env.example .env
+   ```
+
+   Then edit `.env`:
+   ```
+   OPENAI_API_KEY=your_key_here      # For OpenAI-powered explanations
+   GEMINI_API_KEY=your_key_here      # For Gemini-powered explanations
+   ```
+
+   **Note:** If you skip this, the app will use MockClient (offline mode) with templated explanations.
+
+### Running the App
+
+**Option 1: Interactive Streamlit UI (Recommended)**
 
 ```bash
-pip install -r requirements.txt
+streamlit run src/app.py
 ```
 
-3. Run the app:
+Then open your browser to `http://localhost:8501`
+
+Features:
+- ✅ Adjust preferences in real-time
+- ✅ View AI-generated explanations
+- ✅ Run robustness & bias tests
+- ✅ Toggle between mock/real LLM
+- ✅ View LLM call logs (debug)
+
+**Option 2: CLI Interface**
 
 ```bash
-python -m src.main
+python src/main.py
 ```
+
+Shows top 5 recommendations for a pre-configured user profile with detailed scoring breakdowns.
+
+**Option 3: Test Comparison**
+
+```bash
+python assets/scripts/experiment_compare.py
+```
+
+Generates recommendations for multiple user profiles and compares rankings.
 
 ### Running Tests
 
-Run the starter tests with:
+Run the test suite:
 
 ```bash
 pytest
 ```
 
-You can add more tests in `tests/test_recommender.py`.
+Run reliability & robustness tests:
+
+```bash
+pytest tests/test_recommender.py -v
+```
+
+---
+
+## 🤖 AI Features
+
+### 1. **LLM-Powered Explanations (RAG)**
+
+The system uses **Retrieval-Augmented Generation** to explain recommendations:
+
+- **Retrieval**: Fetches song metadata (genre, mood, energy, acousticness, release year)
+- **LLM Processing**: Sends retrieved data + user preferences to an LLM
+- **Generation**: LLM produces natural-language explanation of *why* each song matches
+
+**Example:**
+```
+User: Loves pop, happy mood, high energy
+LLM Output: "Sunrise City is a perfect match because it's a 2010s pop track 
+with a happy vibe and high energy (0.82). Its lower acousticness also aligns 
+with your preference for less acoustic songs."
+```
+
+**Supported Backends:**
+- MockClient (offline, no API key needed)
+- OpenAI GPT-4o-mini
+- Google Gemini 2.0 Flash
+
+### 2. **Reliability & Robustness Testing**
+
+Built-in test suite to verify system behavior:
+
+#### Consistency Tests
+- **What**: Run the same recommendation 10 times, check if output is identical
+- **Result**: Consistency score (1.0 = always consistent, 0.0 = random)
+
+#### Sensitivity Analysis
+- **What**: Perturb inputs (energy ±10%, flip acoustic preference) and measure ranking changes
+- **Result**: % of top-5 songs that change after small input tweaks
+- **Purpose**: Detect brittle behavior or over-sensitivity
+
+#### Adversarial Profiles
+- **What**: Test edge cases (case sensitivity, out-of-range values, unknown labels, sparse profiles)
+- **Result**: Pass/fail for each edge case
+- **Purpose**: Ensure robust error handling
+
+#### Bias Detection
+- **What**: Measure how often each genre appears in top-5 across many profiles
+- **Result**: Genre frequency distribution
+- **Purpose**: Identify if system favors certain genres
 
 ---
 
