@@ -1,7 +1,7 @@
 """
 LLM Client for generating personalized song recommendations.
 
-Supports both offline (MockClient) and online modes (OpenAI, Gemini).
+Supports both offline (MockClient) and online modes (Claude, Gemini).
 Includes error handling and fallback logic for reliability.
 """
 
@@ -47,62 +47,62 @@ class MockClient:
             )
 
 
-class OpenAIClient:
+class ClaudeClient:
     """
-    OpenAI API client for LLM-powered explanations.
+    Anthropic Claude API client for LLM-powered explanations.
 
     Requirements:
-    - openai library installed
-    - OPENAI_API_KEY set in environment
+    - anthropic library installed
+    - ANTHROPIC_API_KEY set in environment
     """
 
     def __init__(
         self,
-        model_name: str = "gpt-4o-mini",
+        model_name: str = "claude-3-5-sonnet-20241022",
         temperature: float = 0.7,
         max_tokens: int = 300,
     ):
-        api_key = os.getenv("OPENAI_API_KEY", "").strip()
+        api_key = os.getenv("ANTHROPIC_API_KEY", "").strip()
         if not api_key:
             raise RuntimeError(
-                "Missing OPENAI_API_KEY. Set it in your .env file or environment."
+                "Missing ANTHROPIC_API_KEY. Set it in your .env file or environment."
             )
 
         try:
-            from openai import OpenAI
+            from anthropic import Anthropic
         except ImportError:
             raise RuntimeError(
-                "openai library not installed. Run: pip install openai"
+                "anthropic library not installed. Run: pip install anthropic"
             )
 
-        self.client = OpenAI(api_key=api_key)
+        self.client = Anthropic(api_key=api_key)
         self.model_name = model_name
         self.temperature = float(temperature)
         self.max_tokens = max_tokens
-        logger.info(f"Initialized OpenAIClient with model {model_name}")
+        logger.info(f"Initialized ClaudeClient with model {model_name}")
 
     def complete(self, system_prompt: str, user_prompt: str) -> str:
         """
-        Sends a request to OpenAI.
+        Sends a request to Anthropic Claude.
         Returns empty string on failure (triggers fallback logic).
         """
         try:
-            response = self.client.chat.completions.create(
+            response = self.client.messages.create(
                 model=self.model_name,
+                max_tokens=self.max_tokens,
+                system=system_prompt,
                 messages=[
-                    {"role": "system", "content": system_prompt},
                     {"role": "user", "content": user_prompt},
                 ],
                 temperature=self.temperature,
-                max_tokens=self.max_tokens,
             )
 
-            result = response.choices[0].message.content or ""
-            logger.debug(f"OpenAI response: {result[:100]}...")
+            result = response.content[0].text or ""
+            logger.debug(f"Claude response: {result[:100]}...")
             return result
 
         except Exception as e:
-            logger.warning(f"OpenAI API error: {e}")
+            logger.warning(f"Claude API error: {e}")
             return ""
 
 

@@ -20,7 +20,7 @@ if str(PROJECT_ROOT) not in sys.path:
     sys.path.insert(0, str(PROJECT_ROOT))
 
 from src.recommender import load_songs, recommend_songs
-from src.llm_client import MockClient, OpenAIClient, GeminiClient, LLMExplainer
+from src.llm_client import MockClient, ClaudeClient, GeminiClient, LLMExplainer
 from src.reliability import (
     run_robustness_tests,
     compute_sensitivity,
@@ -78,20 +78,20 @@ def main():
 
         llm_mode = st.radio(
             "LLM Mode",
-            ["Mock (Offline)", "OpenAI", "Gemini"],
+            ["Mock (Offline)", "Claude", "Gemini"],
             help="Choose LLM backend for explanations",
         )
 
         if llm_mode == "Mock (Offline)":
             st.session_state.llm_explainer = LLMExplainer(MockClient())
             st.success("Using offline mock LLM")
-        elif llm_mode == "OpenAI":
+        elif llm_mode == "Claude":
             try:
-                client = OpenAIClient()
+                client = ClaudeClient()
                 st.session_state.llm_explainer = LLMExplainer(client)
-                st.success("Connected to OpenAI")
+                st.success("Connected to Claude (Anthropic)")
             except RuntimeError as e:
-                st.error(f"OpenAI setup failed: {e}")
+                st.error(f"Claude setup failed: {e}")
                 st.session_state.llm_explainer = LLMExplainer(MockClient())
         elif llm_mode == "Gemini":
             try:

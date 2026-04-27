@@ -1,0 +1,60 @@
+{
+  "summary": {
+    "passed": 4,
+    "total": 4,
+    "pass_rate": 1.0,
+    "avg_confidence": 0.55
+  },
+  "profiles": [
+    {
+      "name": "pop-happy-high-energy",
+      "passed": true,
+      "checks": {
+        "returns_k_recommendations": true,
+        "scores_sorted_desc": true,
+        "top_score_positive": true,
+        "llm_explanation_non_empty": true,
+        "confidence_in_range": true
+      },
+      "top_song": "Sunrise City",
+      "top_score": 13.38,
+      "confidence": 0.817
+    },
+    {
+      "name": "lofi-chill-acoustic",
+      "passed": true,
+      "checks": {
+        "returns_k_recommendations": true,
+        "scores_sorted_desc": true,
+        "top_score_positive": true,
+        "llm_explanation_non_empty": true,
+        "confidence_in_range": true
+      },
+      "top_song": "Library Rain",
+      "top_score": 12.99,
+      "confidence": 0.568
+    },
+    {
+      "name": "unknown-labels-numeric-only",
+      "passed": true,
+      "checks": {
+        "returns_k_recommendations": true,
+        "scores_sorted_desc": true,
+        "top_score_positive": true,
+        "llm_explanation_non_empty": true,
+        "confidence_in_range": true
+      },
+      "top_song": "Sunset Caravan",
+      "top_score": 6.195,
+      "confidence": 0.264
+    }
+  ],
+  "reliability": {
+    "checks": {
+      "consistency_ge_0_95": true,
+      "adversarial_profiles_all_success": true
+    },
+    "passed": true
+  },
+  "llm_call_log_entries": 3
+}
